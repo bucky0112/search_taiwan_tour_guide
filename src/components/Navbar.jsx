@@ -36,18 +36,22 @@ const links = [
 
 const Navbar = () => {
   return (
-    <div className='bg-white flex items-center p-5'>
-      <img src={logo} alt='logo' className='mr-3' />
-      <span className='text-primary'>臺旅・與你</span>
+    <div className='bg-white flex items-center px-5 py-2 justify-between'>
+      <div className='flex items-center cursor-pointer gap-3'>
+        <img src={logo} alt='logo' />
+        <span className='text-primary text-2xl'>臺旅・與你</span>
+      </div>
 
-      <ul className='flex text-primaryText'>{links.map((link, i) => {
-        return (
-          <li key={i}>
-            <img src={link.icon} />
-            {link.title}
-          </li>
-        )
-      })}</ul>
+      <ul className='flex items-center gap-5 text-primaryText'>
+        {links.map((link, i) => {
+          return (
+            <li className='flex items-center gap-2 text-2xl cursor-pointer transition-all hover:text-primary' key={i}>
+              <img className='w-8' src={link.icon} />
+              {link.title}
+            </li>
+          )
+        })}
+      </ul>
     </div>
   )
 }
