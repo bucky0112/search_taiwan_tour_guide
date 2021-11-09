@@ -6,8 +6,11 @@ module.exports = {
     colors: {
       primary: '#FF7144',
       secondary: '#FFB865',
-      primaryText: '#4F4F4F',
-      secondaryBG: '#F2F2F2'
+      grey: {
+        DEFAULT: '#828282',
+        dark: '#4F4F4F',
+        light: '#F2F2F2'
+      }
     },
     extend: {}
   },
