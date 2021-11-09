@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Search from '../components/Search'
 import { apiGetAllHotel } from '../request/api'
 import defaultImg from '../assets/default_hotel.png'
+// import { BsHeart } from 'react-icons/bs'
 
 const Hotels = () => {
   const [hotels, setHotels] = useState([])
@@ -19,30 +20,47 @@ const Hotels = () => {
     fetchAllHotel()
   }, [])
 
-  console.log(hotels)
-
   return (
-    <div className='py-10'>
+    <div>
       <Search />
-      <div>
-        <h2>旅宿</h2>
-        <div className='flex'>
-          <figure className='bg-grey-light rounded-l-xl'>
-            <img src={defaultImg} alt='hotel_picture' />
-            <figcaption>
-              <h3>臺北青旅</h3>
-              <span>臺北市, 文山區</span>
-              <p>12333333</p>
-            </figcaption>
-          </figure>
-          <figure className='bg-grey-light rounded-l-xl'>
-            <img src={defaultImg} alt='hotel_picture' />
-            <figcaption>
-              <h3>臺北青旅</h3>
-              <span>臺北市, 文山區</span>
-              <p>12333333</p>
-            </figcaption>
-          </figure>
+      <div className='grid justify-center py-40 px-36 gap-6'>
+        <h2 className='items-start'>旅宿</h2>
+        <div className='grid grid-cols-3 gap-5'>
+          {hotels.length > 0 && hotels.map((hotel, i) => {
+            const { Picture, Name, Description, Address } = hotel
+
+            const counties = Address.slice(0, 3)
+            const township = Address.slice(3, 6)
+
+            return (
+              <figure
+                key={i}
+                className='bg-grey-light rounded-3xl overflow-hidden'
+              >
+                {/* <BsHeart className='' /> */}
+                {Picture.PictureUrl1
+                  ? (
+                  <img
+                    src={Picture.PictureUrl1}
+                    alt='hotel_picture'
+                    className='w-full h-80 object-cover'
+                  />
+                    )
+                  : (
+                  <img
+                    src={defaultImg}
+                    alt='hotel_picture'
+                    className='w-full h-80 object-cover'
+                  />
+                    )}
+                <figcaption className='m-5'>
+                  <h3>{Name}</h3>
+                  <span>{`${counties} 。 ${township}`}</span>
+                  <p>{Description}</p>
+                </figcaption>
+              </figure>
+            )
+          })}
         </div>
       </div>
     </div>
