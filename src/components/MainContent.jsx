@@ -1,11 +1,15 @@
 import React from 'react'
-import Hotels from '../views/Hotels'
+import Hotels from './content/Hotels'
+import Restaurant from './content/Restaurant'
+import Active from './content/Active'
 
 const MainContent = () => {
   return (
-    <div>
+    <>
       <Hotels />
-    </div>
+      <Restaurant />
+      <Active />
+    </>
   )
 }
 

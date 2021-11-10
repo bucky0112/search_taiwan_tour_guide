@@ -29,3 +29,11 @@ const baseRequest = axios.create({
 // 取得所有旅宿資料
 export const apiGetAllHotel = (num1, num2) =>
   baseRequest.get(`Hotel?$top=${num1}&$skip=${num2}&$format=JSON`)
+
+// 取得所有餐廳資料
+export const apiGetAllRestaurant = (num1, num2) =>
+  baseRequest.get(`Restaurant?$top=${num1}&$skip=${num2}&$format=JSON`)
+
+// 取得所有餐廳資料
+export const apiGetAllActive = (num1, num2) =>
+  baseRequest.get(`Activity?$top=${num1}&$skip=${num2}&$format=JSON`)

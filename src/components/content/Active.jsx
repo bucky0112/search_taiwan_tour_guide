@@ -1,15 +1,15 @@
-import React, { useEffect, useReducer } from 'react'
-import { apiGetAllHotel } from '../request/api'
-import defaultImg from '../assets/default_hotel.png'
-import location from '../assets/location.png'
-import save from '../assets/save-white.png'
+import React, { useReducer, useEffect } from 'react'
+import location from '../../assets/location.png'
+import save from '../../assets/save-white.png'
+import defaultImg from '../../assets/default_active.png'
 import { AiOutlineArrowRight } from 'react-icons/ai'
+import { apiGetAllActive } from '../../request/api'
 
-const hotelsState = {
+const activeState = {
   showState: []
 }
 
-const hotelsReducer = (state, action) => {
+const activeReducer = (state, action) => {
   switch (action.type) {
     case 'getAllData':
       return {
@@ -20,12 +20,12 @@ const hotelsReducer = (state, action) => {
   }
 }
 
-const Hotels = () => {
-  const [state, dispatch] = useReducer(hotelsReducer, hotelsState)
+const Active = () => {
+  const [state, dispatch] = useReducer(activeReducer, activeState)
 
   const fetchAllHotel = async () => {
     try {
-      const { status, data } = await apiGetAllHotel(6, 0)
+      const { status, data } = await apiGetAllActive(6, 0)
       if (status === 200) {
         dispatch({ type: 'getAllData', payload: data })
       }
@@ -49,15 +49,15 @@ const Hotels = () => {
   const { showState } = state
 
   return (
-    <div className='flex flex-col gap-10 justify-center py-32 px-36 text-grey-dark'>
-      <h2 className='items-start text-4xl font-normal'>旅宿</h2>
-      <div className='grid grid-cols-3 grid-rows-2 gap-5'>
+    <div className='flex flex-col gap-10 justify-center pt-5 px-36 text-grey-dark'>
+      <h2 className='items-start text-4xl font-normal'>活動</h2>
+      <div className='grid grid-cols-3 grid-rows-2 gap-x-5 gap-y-10'>
         {showState.length > 0 &&
-          showState.map((hotel, i) => {
-            const { Picture, Name, Description, Address } = hotel
+          showState.map((item, i) => {
+            const { Picture, Name, Description, Address } = item
 
-            const counties = Address.slice(0, 3)
-            const township = Address.slice(3, 6)
+            const counties = Address ? Address.slice(0, 3) : ''
+            const township = Address ? Address.slice(3, 6) : ''
 
             return (
               <figure
@@ -105,4 +105,4 @@ const Hotels = () => {
   )
 }
 
-export default Hotels
+export default Active
