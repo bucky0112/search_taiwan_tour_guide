@@ -1,16 +1,34 @@
-import React, { useEffect, useState } from 'react'
-import Search from '../components/Search'
+import React, { useEffect, useReducer } from 'react'
 import { apiGetAllHotel } from '../request/api'
 import defaultImg from '../assets/default_hotel.png'
-// import { BsHeart } from 'react-icons/bs'
+import location from '../assets/location.png'
+import save from '../assets/save-white.png'
+import { AiOutlineArrowRight } from 'react-icons/ai'
+
+const hotelsState = {
+  showState: []
+}
+
+const hotelsReducer = (state, action) => {
+  switch (action.type) {
+    case 'getAllData':
+      return {
+        showState: action.payload
+      }
+    default:
+      return state
+  }
+}
 
 const Hotels = () => {
-  const [hotels, setHotels] = useState([])
+  const [state, dispatch] = useReducer(hotelsReducer, hotelsState)
 
   const fetchAllHotel = async () => {
     try {
-      const { status, data } = await apiGetAllHotel(6)
-      status === 200 && setHotels(data)
+      const { status, data } = await apiGetAllHotel(6, 0)
+      if (status === 200) {
+        dispatch({ type: 'getAllData', payload: data })
+      }
     } catch (err) {
       console.log(err)
     }
@@ -20,13 +38,22 @@ const Hotels = () => {
     fetchAllHotel()
   }, [])
 
+  const handleTextLength = (text, num) => {
+    return text && text.length > num
+      ? `${text.slice(0, num)} ...`
+      : text && text.length < num
+        ? text.slice(0, num)
+        : ''
+  }
+
+  const { showState } = state
+
   return (
-    <div>
-      <Search />
-      <div className='grid justify-center py-40 px-36 gap-6'>
-        <h2 className='items-start'>旅宿</h2>
-        <div className='grid grid-cols-3 gap-5'>
-          {hotels.length > 0 && hotels.map((hotel, i) => {
+    <div className='flex flex-col gap-10 justify-center py-32 px-36 text-grey-dark'>
+      <h2 className='items-start text-4xl font-normal'>旅宿</h2>
+      <div className='grid grid-cols-3 grid-rows-2 gap-5'>
+        {showState.length > 0 &&
+          showState.map((hotel, i) => {
             const { Picture, Name, Description, Address } = hotel
 
             const counties = Address.slice(0, 3)
@@ -35,33 +62,44 @@ const Hotels = () => {
             return (
               <figure
                 key={i}
-                className='bg-grey-light rounded-3xl overflow-hidden'
+                className='bg-grey-light rounded-3xl overflow-hidden shadow-2xl grid grid-cols-2'
               >
-                {/* <BsHeart className='' /> */}
                 {Picture.PictureUrl1
                   ? (
                   <img
                     src={Picture.PictureUrl1}
                     alt='hotel_picture'
-                    className='w-full h-80 object-cover'
+                    className='w-full h-96 object-cover col-start-1 col-span-2 row-start-1 z-10'
                   />
                     )
                   : (
                   <img
                     src={defaultImg}
                     alt='hotel_picture'
-                    className='w-full h-80 object-cover'
+                    className='w-full h-96 object-cover col-start-1 col-span-2 row-start-1 z-10'
                   />
                     )}
-                <figcaption className='m-5'>
-                  <h3>{Name}</h3>
-                  <span>{`${counties} 。 ${township}`}</span>
-                  <p>{Description}</p>
+                <img
+                  src={save}
+                  alt='save'
+                  className='text-grey-light mt-1 z-20 overflow-hidden col-start-2 row-start-1 justify-self-end mr-5 mt-5 cursor-pointer'
+                />
+                <figcaption className='flex flex-col gap-3 py-3 px-6 col-start-1 col-span-2'>
+                  <h3 className='text-2xl'>{Name}</h3>
+                  <span className='flex gap-3'>
+                    <img src={location} alt='location' />
+                    <p className='text-xl'>{`${counties}, ${township}`}</p>
+                  </span>
+                  <p>{handleTextLength(Description, 110)}</p>
                 </figcaption>
               </figure>
             )
           })}
-        </div>
+      </div>
+      <div className='flex justify-end'>
+        <a href='#' className='bg-secondary p-3 rounded-full'>
+          <AiOutlineArrowRight className='text-7xl text-grey-light' />
+        </a>
       </div>
     </div>
   )

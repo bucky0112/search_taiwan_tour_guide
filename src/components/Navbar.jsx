@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import logo from '../assets/Logo.png'
 import home from '../assets/home.png'
 import hotel from '../assets/hotel.png'
@@ -51,14 +50,13 @@ const Navbar = () => {
       <ul className='flex items-center gap-16 text-grey-dark'>
         {links.map((link, i) => {
           return (
-            <Link key={i} to={link.link}>
-              <li
-                className='flex items-center gap-4 text-3xl cursor-pointer transition-all hover:text-primary'
-              >
-                <img className='w-8' src={link.icon} />
-                {link.title}
-              </li>
-            </Link>
+            <li
+              key={i}
+              className='flex items-center gap-4 text-3xl cursor-pointer transition-all hover:text-primary'
+            >
+              <img className='w-8' src={link.icon} />
+              {link.title}
+            </li>
           )
         })}
       </ul>

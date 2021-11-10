@@ -27,4 +27,5 @@ const baseRequest = axios.create({
 })
 
 // 取得所有旅宿資料
-export const apiGetAllHotel = (num) => baseRequest.get(`Hotel?$top=${num}&$format=JSON`)
+export const apiGetAllHotel = (num1, num2) =>
+  baseRequest.get(`Hotel?$top=${num1}&$skip=${num2}&$format=JSON`)
