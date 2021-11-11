@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import cityOptions from '../utils/cityOption.json'
 import months from '../utils/months.json'
 import arrow from '../assets/arrow.png'
+import whiteArrow from '../assets/arrow_white.png'
 
 const Search = () => {
+  const [isShow, setIsShow] = useState(false)
+
   return (
     <div className='bg-grey-light flex flex-col justify-center px-20 lg:px-40 xl:px-72 pt-8 md:pt-16 pb-40'>
       <h2 className='text-grey-dark text-center text-4xl mb-10 whitespace-nowrap'>
@@ -67,9 +70,17 @@ const Search = () => {
         </div>
         <a
           href='#'
-          className='border-primary border-8 md:border-2 rounded-full p-5 md:py-3 mt-6 md:mt-0 text-primary md:self-end flex items-center justify-center transition-all hover:bg-primary hover:text-grey-light'
+          className='border-primary border-8 md:border-2 rounded-full p-5 md:py-3 mt-6 md:mt-0 text-primary md:self-end flex items-center justify-center transition-all hover:bg-primary'
+          onMouseEnter={() => setIsShow(true)}
+          onMouseLeave={() => setIsShow(false)}
         >
-          <img src={arrow} alt='search' />
+          {isShow
+            ? (
+            <img src={whiteArrow} alt='search' />
+              )
+            : (
+            <img src={arrow} alt='search' />
+              )}
         </a>
       </div>
     </div>

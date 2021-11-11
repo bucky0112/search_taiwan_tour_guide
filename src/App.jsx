@@ -9,7 +9,7 @@ const App = () => {
     <>
       <Navbar />
       <Search />
-      <MainContent />
+      <MainContent className='relative' />
       <Footer />
     </>
   )

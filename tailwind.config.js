@@ -13,7 +13,14 @@ module.exports = {
       },
       white: '#fff'
     },
-    extend: {}
+    extend: {
+      backdropBlur: {
+        lg: '18px'
+      },
+      backdropOpacity: {
+        35: '.35'
+      }
+    }
   },
   plugins: []
 }

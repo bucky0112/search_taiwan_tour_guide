@@ -70,28 +70,41 @@ const smLinks = [
 
 const Navbar = () => {
   return (
-    <div className='bg-grey-light md:bg-white md:flex flex-col gap-10 xl:flex-row items-center px-10 py-7 justify-between'>
-      <div className='flex items-center gap-6 sm:gap-3 justify-between'>
-        <img src={home} alt='home' className='w-6 md:hidden block cursor-pointer' />
-        <img src={logo} alt='logo' className='w-40 sm:w-auto md:w-auto cursor-pointer' />
-        <img src={save} alt='save' className='w-6 md:hidden block cursor-pointer' />
-      </div>
+    <>
+      <nav className='bg-grey-light md:bg-white md:flex flex-col gap-10 xl:flex-row items-center px-10 py-7 justify-between sticky z-30 top-0 backdrop-filter backdrop-blur-lg bg-opacity-35'>
+        <div className='flex items-center gap-6 sm:gap-3 justify-between'>
+          <img
+            src={home}
+            alt='home'
+            className='w-6 md:hidden block cursor-pointer'
+          />
+          <img
+            src={logo}
+            alt='logo'
+            className='w-40 sm:w-auto md:w-auto cursor-pointer'
+          />
+          <img
+            src={save}
+            alt='save'
+            className='w-6 md:hidden block cursor-pointer'
+          />
+        </div>
 
-      <ul className='hidden md:flex items-center md:gap-16 text-grey-dark'>
-        {links.map((link, i) => {
-          return (
-            <li
-              key={i}
-              className='flex flex-col  lg:flex-row items-center gap-4 lg:text-3xl cursor-pointer transition-all hover:text-primary whitespace-nowrap'
-            >
-              <img className='lg:w-8' src={link.icon} />
-              {link.title}
-            </li>
-          )
-        })}
-      </ul>
-
-      <ul className='md:hidden flex fixed justify-evenly items-center bottom-0 z-30 py-5 bg-secondary w-full -ml-10'>
+        <ul className='hidden md:flex items-center md:gap-16 text-grey-dark'>
+          {links.map((link, i) => {
+            return (
+              <li
+                key={i}
+                className='flex flex-col  lg:flex-row items-center gap-4 lg:text-3xl cursor-pointer transition-all hover:text-primary whitespace-nowrap'
+              >
+                <img className='lg:w-8' src={link.icon} />
+                {link.title}
+              </li>
+            )
+          })}
+        </ul>
+      </nav>
+      <ul className='md:hidden flex fixed justify-evenly items-center bottom-0 z-30 py-5 bg-secondary w-full'>
         {smLinks.map((link, i) => {
           return (
             <li
@@ -104,7 +117,7 @@ const Navbar = () => {
           )
         })}
       </ul>
-    </div>
+    </>
   )
 }
 
