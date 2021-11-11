@@ -49,10 +49,10 @@ const Hotels = () => {
   const { showState } = state
 
   return (
-    <div className='flex flex-col px-40 pt-20 gap-10'>
+    <div className='flex flex-col px-10 xl:px-40 pt-20 gap-10'>
       <h2 className='items-start text-4xl font-normal'>旅宿</h2>
       <div className='flex flex-row overflow-x-scroll space-x-8 xl:flex-col gap-10 xl:justify-center text-grey-dark'>
-        <div className='flex flex-nowrap py-10 lg:py-0 lg:grid grid-cols-7 lg:grid-cols-3 grid-rows-2 gap-x-5 gap-y-10'>
+        <div className='flex flex-nowrap py-10 xl:py-0 xl:grid grid-cols-7 xl:grid-cols-3 grid-rows-2 gap-x-5 gap-y-10'>
           {showState.length > 0 &&
             showState.map((hotel, i) => {
               const { Picture, Name, Description, Address } = hotel
@@ -63,7 +63,7 @@ const Hotels = () => {
               return (
                 <figure
                   key={i}
-                  className='w-80 lg:w-full bg-grey-light rounded-3xl overflow-hidden shadow-xl grid grid-cols-2'
+                  className='w-80 xl:w-full bg-grey-light rounded-3xl overflow-hidden shadow-xl grid grid-cols-2'
                 >
                   {Picture.PictureUrl1
                     ? (
@@ -97,10 +97,10 @@ const Hotels = () => {
               )
             })}
         </div>
-        <div className='flex flex-col lg:flex-row justify-center lg:justify-end'>
-          <a href='#' className='bg-secondary p-3 rounded-full lg:block flex gap-5 flex-col items-center'>
+        <div className='flex flex-col xl:flex-row justify-center xl:justify-end'>
+          <a href='#' className='bg-secondary p-3 rounded-full xl:block flex gap-5 flex-col items-center'>
             <AiOutlineArrowRight className='text-7xl text-grey-light' />
-            <p className='lg:hidden block vertical text-2xl pb-5 tracking-widest'>更多旅舍</p>
+            <p className='xl:hidden block vertical text-2xl pb-5 tracking-widest'>更多旅舍</p>
           </a>
         </div>
       </div>
