@@ -71,7 +71,7 @@ const smLinks = [
 const Navbar = () => {
   return (
     <>
-      <nav className='bg-grey-light md:bg-white md:flex flex-col gap-10 xl:flex-row items-center px-10 py-7 justify-between sticky z-30 top-0 backdrop-filter backdrop-blur-lg bg-opacity-35'>
+      <nav className='bg-grey-light md:bg-white md:flex flex-col gap-10 xl:flex-row items-center px-10 py-4 justify-between sticky z-30 top-0 backdrop-filter backdrop-blur-lg bg-opacity-35'>
         <div className='flex items-center gap-6 sm:gap-3 justify-between'>
           <img
             src={home}
@@ -104,14 +104,14 @@ const Navbar = () => {
           })}
         </ul>
       </nav>
-      <ul className='md:hidden flex fixed justify-evenly items-center bottom-0 z-30 py-5 bg-secondary w-full'>
+      <ul className='md:hidden flex fixed justify-evenly items-center bottom-0 z-30 pt-3 pb-2 bg-secondary w-full'>
         {smLinks.map((link, i) => {
           return (
             <li
               key={i}
               className='flex flex-col items-center gap-2 text-grey-light first:text-grey-dark cursor-pointer'
             >
-              <img className='w-8 text-grey-light' src={link.icon} />
+              <img className='w-6 text-grey-light' src={link.icon} />
               {link.title}
             </li>
           )
