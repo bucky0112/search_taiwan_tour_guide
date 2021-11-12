@@ -51,7 +51,7 @@ const Hotels = () => {
   return (
     <div className='flex flex-col px-10 xl:px-40 pt-5 gap-5'>
       <h2 className='items-start text-4xl font-normal'>旅宿</h2>
-      <div className='flex flex-row overflow-x-scroll space-x-8 xl:flex-col gap-10 xl:justify-center text-grey-dark'>
+      <div className='flex flex-row overflow-x-scroll xl:overflow-x-visible space-x-8 xl:flex-col gap-10 xl:justify-center text-grey-dark'>
         <div className='flex flex-nowrap pb-8 xl:pb-0 xl:grid grid-cols-7 xl:grid-cols-3 grid-rows-2 gap-x-5 gap-y-10'>
           {showState.length > 0 &&
             showState.map((hotel, i) => {

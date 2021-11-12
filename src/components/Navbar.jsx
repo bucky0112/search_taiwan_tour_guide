@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import logo from '../assets/Logo.png'
 import home from '../assets/home.png'
 import hotel from '../assets/hotel.png'
@@ -69,6 +70,8 @@ const smLinks = [
 ]
 
 const Navbar = () => {
+  const navigate = useNavigate()
+
   return (
     <>
       <nav className='bg-grey-light md:bg-white md:flex flex-col gap-10 xl:flex-row items-center px-10 py-4 justify-between sticky z-30 top-0 backdrop-filter backdrop-blur-lg bg-opacity-35'>
@@ -77,11 +80,13 @@ const Navbar = () => {
             src={home}
             alt='home'
             className='w-6 md:hidden block cursor-pointer'
+            onClick={() => navigate('/')}
           />
           <img
             src={logo}
             alt='logo'
             className='w-40 sm:w-auto md:w-auto cursor-pointer'
+            onClick={() => navigate('/')}
           />
           <img
             src={save}
@@ -96,6 +101,7 @@ const Navbar = () => {
               <li
                 key={i}
                 className='flex flex-col  lg:flex-row items-center gap-4 lg:text-3xl cursor-pointer transition-all hover:text-primary whitespace-nowrap'
+                onClick={() => navigate(link.link)}
               >
                 <img className='lg:w-8' src={link.icon} />
                 {link.title}
@@ -110,6 +116,7 @@ const Navbar = () => {
             <li
               key={i}
               className='flex flex-col items-center gap-2 text-grey-light first:text-grey-dark cursor-pointer'
+              onClick={() => navigate(link.link)}
             >
               <img className='w-6 text-grey-light' src={link.icon} />
               {link.title}
