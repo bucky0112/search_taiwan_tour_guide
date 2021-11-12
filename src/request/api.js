@@ -37,3 +37,15 @@ export const apiGetAllRestaurant = (num1, num2) =>
 // 取得所有餐廳資料
 export const apiGetAllActive = (num1, num2) =>
   baseRequest.get(`Activity?$top=${num1}&$skip=${num2}&$format=JSON`)
+
+// 取得指定縣市旅宿資料
+export const apiGetCityHotel = (city, num1, num2) =>
+  baseRequest.get(`Hotel/${city}?$top=${num1}&$skip=${num2}&$format=JSON`)
+
+// 取得指定縣市餐廳資料
+export const apiGetCityRestaurant = (city, num1, num2) =>
+  baseRequest.get(`Restaurant/${city}?$top=${num1}&$skip=${num2}&$format=JSON`)
+
+// 取得指定縣市餐廳資料
+export const apiGetCityActive = (city, num1, num2) =>
+  baseRequest.get(`Activity/${city}?$top=${num1}&$skip=${num2}&$format=JSON`)

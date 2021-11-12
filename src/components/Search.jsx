@@ -1,11 +1,82 @@
-import React, { useState } from 'react'
+import React, { useState, useReducer, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import {
+  apiGetCityHotel,
+  apiGetCityRestaurant,
+  apiGetCityActive
+} from '../request/api'
+import { searchDataActions } from '../store/searchDataSlice'
 import cityOptions from '../utils/cityOption.json'
 import months from '../utils/months.json'
 import arrow from '../assets/arrow.png'
 import whiteArrow from '../assets/arrow_white.png'
 
+const initialState = {
+  CITY_VALUE: '',
+  MONTH_VALUE: '',
+  KEY_VALUE: ''
+}
+
+const searchReducer = (state, action) => {
+  switch (action.type) {
+    case 'chooseCity':
+      return {
+        ...state,
+        CITY_VALUE: action.payload
+      }
+    default:
+      return state
+  }
+}
+
 const Search = () => {
   const [isShow, setIsShow] = useState(false)
+
+  const [searchState, searchDispatch] = useReducer(searchReducer, initialState)
+
+  useEffect(() => {
+    searchDispatch({ type: 'chooseCity', payload: cityOptions[0].CITY_VALUE })
+  }, [])
+
+  const { CITY_VALUE } = searchState
+
+  const dispatch = useDispatch()
+
+  const fetchCityHotel = async () => {
+    try {
+      const res = await apiGetCityHotel(CITY_VALUE, 6, 0)
+      res.status === 200 &&
+        dispatch(searchDataActions.getAllHotelsData(res.data))
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  const fetchCityRestaurant = async () => {
+    try {
+      const res = await apiGetCityRestaurant(CITY_VALUE, 6, 0)
+      res.status === 200 &&
+        dispatch(searchDataActions.getAllRestaurants(res.data))
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  const fetchCityActive = async () => {
+    try {
+      const res = await apiGetCityActive(CITY_VALUE, 6, 0)
+      res.status === 200 && dispatch(searchDataActions.getAllActives(res.data))
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  const handleSearch = () => {
+    fetchCityHotel()
+    fetchCityRestaurant()
+    fetchCityActive()
+    dispatch(searchDataActions.clickSearch(true))
+  }
 
   return (
     <div className='bg-grey-light flex flex-col justify-center px-20 lg:px-40 xl:px-72 pt-8 md:pt-16 pb-40'>
@@ -21,13 +92,17 @@ const Search = () => {
             name='location'
             id='location'
             className='bg-secondary outline-none appearance-none cursor-pointer rounded-full text-grey-light px-8 py-1 h-12 md:h-16 text-2xl'
+            value={CITY_VALUE}
+            onChange={(e) =>
+              searchDispatch({ type: 'chooseCity', payload: e.target.value })
+            }
           >
             {cityOptions.map((option, i) => {
               return (
                 <option
                   key={i}
                   className='bg-grey-light text-grey-dark'
-                  value={option.CITY_NAME}
+                  value={option.CITY_VALUE}
                 >
                   {option.CITY_NAME}
                 </option>
@@ -73,6 +148,7 @@ const Search = () => {
           className='border-primary border-8 md:border-2 rounded-full p-5 md:py-3 mt-6 md:mt-0 text-primary md:self-end flex items-center justify-center transition-all hover:bg-primary'
           onMouseEnter={() => setIsShow(true)}
           onMouseLeave={() => setIsShow(false)}
+          onClick={handleSearch}
         >
           {isShow
             ? (
