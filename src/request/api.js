@@ -3,8 +3,8 @@ import jsSHA from 'jssha'
 
 const getAuthorizationHeader = () => {
   //  填入自己 ID、KEY 開始
-  const AppID = 'a0066b1631e34ed8945983f9eca3c62b'
-  const AppKey = 'to_EbdAoFp71U2dHgXbG4Z30XLg'
+  const AppID = import.meta.env.VITE_APP_ID
+  const AppKey = import.meta.env.VITE_APP_KEY
   //  填入自己 ID、KEY 結束
   const GMTString = new Date().toGMTString()
   const JsSHA = jsSHA
