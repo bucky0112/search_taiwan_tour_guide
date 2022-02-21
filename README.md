@@ -1,7 +1,7 @@
 # 台灣旅遊景點導覽
 
 ## Demo
-![Mobile](https://i.imgur.com/jhdJJOW.png)
+![Mobile](https://i.imgur.com/wvsu9dg.png)
 ![Desktop](https://i.imgur.com/EhIL9CE.jpg)
 [https://f2e-three.vercel.app/](https://f2e-three.vercel.app/)
 
